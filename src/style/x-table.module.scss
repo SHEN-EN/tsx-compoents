@@ -1,0 +1,36 @@
+.el-table{
+    display: flex;
+    flex-direction: column;
+    .el-header{
+        display: flex;
+        color: #909399;
+        font-weight: 500;
+        .el-column{
+            flex: 1;
+            display: flex;
+            padding: 12px;
+            box-sizing: border-box;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            text-align: left;
+        }
+    }
+    .el-body{
+        .el-row{
+            flex: 1;
+            display: flex;
+            &-cell{
+                padding: 12px;
+                display: flex;
+                flex: 1;
+                box-sizing: border-box;
+                text-overflow: ellipsis;
+                vertical-align: middle;
+                text-align: left;
+            }
+            &:hover{
+                background: #f5f7fa;
+            }
+        }
+    }
+}
