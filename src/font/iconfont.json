@@ -1,0 +1,23 @@
+{
+  "id": "2983212",
+  "name": "myCompoents",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "929809",
+      "name": "sort-down",
+      "font_class": "sortdown",
+      "unicode": "e818",
+      "unicode_decimal": 59416
+    },
+    {
+      "icon_id": "929812",
+      "name": "sort-up",
+      "font_class": "sortup",
+      "unicode": "e81b",
+      "unicode_decimal": 59419
+    }
+  ]
+}

@@ -11,27 +11,40 @@ export default defineComponent({
         {
           name:"1234",
           address:'row2'
+        },
+        {
+          name:"123",
+          address:'row1'
+        },
+        {
+          name:"1234",
+          address:'row2'
         }
       ],
       tableColumn: [
         {
           title: 'Name',
           scopedSlots: 'name',
+          sort:true,
         },
         {
           title: 'Address',
         }
       ]
     })
+    const setCurrentRow = (item:object)=>{
+        
+    }
     return {
-      state
+      state,
+      setCurrentRow
     }
   },
   render() {
-    const { state } = this
+    const { state,setCurrentRow } = this;
     return (
       <div class="render-component">
-        <Xtable tableData={state.tableData} tableColumn={state.tableColumn} v-slots={{
+        <Xtable onSetCurrentRow={(item:object)=>setCurrentRow(item)} tableData={state.tableData} tableColumn={state.tableColumn} v-slots={{
           name: (props:any) => {
             return(
               <div>{props}</div>

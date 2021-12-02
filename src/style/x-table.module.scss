@@ -13,12 +13,27 @@
             text-overflow: ellipsis;
             vertical-align: middle;
             text-align: left;
+            .caret-wrapper{
+                position: relative;
+                top: 4px;
+                left: 4px;
+                i{
+                    font-size: 14px;
+                    position: absolute;
+                }
+            }
+        }
+        .is-sortable{
+            cursor: pointer;
         }
     }
     .el-body{
+        overflow: auto;
+        max-height: unset;
         .el-row{
             flex: 1;
             display: flex;
+            border-top: 1px #e9eaec solid;
             &-cell{
                 padding: 12px;
                 display: flex;
@@ -31,6 +46,15 @@
             &:hover{
                 background: #f5f7fa;
             }
+            &:last-of-type{
+                border-bottom: 1px #e9eaec solid;
+            }
+        }
+        .striped{
+            background: #fafafa;
+        }
+        .current-row{
+            background: #ecf5ff;
         }
     }
 }
