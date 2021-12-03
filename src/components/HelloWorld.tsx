@@ -25,10 +25,12 @@ export default defineComponent({
         {
           title: 'Name',
           scopedSlots: 'name',
+          prop:"name",
           sort:true,
         },
         {
           title: 'Address',
+          prop:"address",
         }
       ]
     })

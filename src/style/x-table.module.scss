@@ -15,11 +15,14 @@
             text-align: left;
             .caret-wrapper{
                 position: relative;
-                top: 4px;
+                top: 2px;
                 left: 4px;
                 i{
-                    font-size: 14px;
+                    font-size: 16px;
                     position: absolute;
+                }
+                .active{
+                    color: #409eff;
                 }
             }
         }
