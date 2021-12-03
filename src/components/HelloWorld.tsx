@@ -31,6 +31,7 @@ export default defineComponent({
         {
           title: 'Address',
           prop:"address",
+          sort:true,
         }
       ]
     })

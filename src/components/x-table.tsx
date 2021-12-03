@@ -31,7 +31,10 @@ export default defineComponent({
                 row: {},
                 index: -1,
             },
-            soltOrder: '',
+            soltOrder: {
+                order: '',
+                prop: '',
+            } as defaultSort,
             initialTableData: [] as tableData[]
         })
         state.initialTableData = deepCopy(props.tableData);
@@ -46,16 +49,21 @@ export default defineComponent({
                 'descending': '',
                 '': 'ascending'
             } as { [key: string]: string }
-            state.soltOrder = sortAction[state.soltOrder]
-            props.tableData.sort(sortRow(prop, state.soltOrder));
+            if(prop !== state.soltOrder.prop){
+                state.soltOrder.prop = '';
+                state.soltOrder.order = '';
+            }
+            state.soltOrder.prop = prop;
+            state.soltOrder.order = sortAction[state.soltOrder.order]
+            props.tableData.sort(sortRow(prop, state.soltOrder.order));
         }
         const tableData = computed(() => {
-            if (!state.soltOrder) return state.initialTableData;
+            if (!state.soltOrder.order) return state.initialTableData;
             return props.tableData
         })
         onMounted(() => {
             if (props?.defaultSolt) {
-                state.soltOrder = props.defaultSolt.order;
+                state.soltOrder.order = props.defaultSolt.order;
                 sortChange(props.defaultSolt.prop);
             }
 
@@ -87,8 +95,8 @@ export default defineComponent({
                             {tableSort.map(val =>
                                 val == item.prop &&
                                 <span class={el['caret-wrapper']}>
-                                    <i class={['iconfont', 'icon-sortdown', state.soltOrder == 'descending' && el['active']]}></i>
-                                    <i class={['iconfont', 'icon-sortup', state.soltOrder == 'ascending' && el['active']]}></i>
+                                    <i class={['iconfont', 'icon-sortdown', (state.soltOrder.prop == val && state.soltOrder.order == 'descending') && el['active']]}></i>
+                                    <i class={['iconfont', 'icon-sortup', (state.soltOrder.prop == val && state.soltOrder.order == 'ascending') && el['active']]}></i>
                                 </span>
                             )}
                         </div>
