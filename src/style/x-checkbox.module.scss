@@ -1,0 +1,115 @@
+.el-checkbox {
+    position: relative;
+
+    input[type='checkbox']:checked+label:before {
+        background: #409eff;
+        border-color: #409eff;
+    }
+
+    input[type='checkbox']:checked:disabled+label:after {
+        background: #eee;
+        display: block;
+    }
+
+    input[type='checkbox']:checked:disabled+label:before {
+        background: #eee;
+        border-color: #eee;
+    }
+
+    input[type='checkbox']:checked+label:after {
+        background: #409eff;
+    }
+
+    input[type="checkbox"]:disabled {
+        cursor: not-allowed;
+        background: #eee;
+    }
+
+    input[type="checkbox"]:disabled+label:before {
+        background: #eee;
+    }
+
+    input[type="checkbox"]:disabled+label:after {
+        background: #eee;
+        display: none;
+    }
+
+    &-inner {
+        position: absolute;
+        left: 1px;
+        top: -2px;
+        cursor: pointer;
+        width: 13px;
+        height: 13px;
+        z-index: 2;
+        opacity: 0;
+    }
+
+    .normal {
+        position: absolute;
+        font-size: 14px;
+        left: 30px;
+        top: 0;
+        height: 13px;
+        line-height: 13px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 2px;
+            width: 3px;
+            height: 8px;
+            border: 0;
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            background: #fff;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+
+        }
+    }
+
+    .indeterminate {
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: -23px;
+            top: 7px;
+            width: 8px;
+            height: 0px;
+            border: 0;
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            background: #fff;
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+        }
+
+    }
+}

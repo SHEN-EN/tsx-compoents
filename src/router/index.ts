@@ -2,8 +2,13 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    name: "HelloWorld",
-    component: () => import("../components/HelloWorld"),
+    name: "table",
+    component: () => import("@/example/table"),
+  },
+  {
+    path: "/checkbox",
+    name: "checkbox",
+    component: () => import("@/example/checkbox"),
   },
 ];
 

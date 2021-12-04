@@ -1,5 +1,5 @@
 import { defineComponent, reactive } from 'vue';
-import Xtable from './x-table';
+import Xtable from '@/components/x-table';
 export default defineComponent({
   setup() {
     const state = reactive({

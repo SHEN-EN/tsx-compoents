@@ -58,6 +58,9 @@
         }
         .current-row{
             background: #ecf5ff;
+            &:hover{
+                background: #ecf5ff;
+            }
         }
     }
 }
