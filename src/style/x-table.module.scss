@@ -26,6 +26,10 @@
                 }
             }
         }
+        .is_selection{
+            width: 54px;
+            flex: none;
+        }
         .is-sortable{
             cursor: pointer;
         }
@@ -52,6 +56,10 @@
             &:last-of-type{
                 border-bottom: 1px #e9eaec solid;
             }
+        }
+        .is_selection{
+            width: 54px;
+            flex: none;
         }
         .striped{
             background: #fafafa;

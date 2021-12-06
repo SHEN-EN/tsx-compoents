@@ -2,6 +2,7 @@ import { defineComponent, PropType, reactive, computed, onMounted } from "vue";
 import el from "@/style/x-table.module.scss";
 import { tableColumn, tableData, defaultSort } from "@/type/table";
 import { sortRow, deepCopy } from "@/util";
+import Xcheckbox from "@/components/x-checkbox";
 export default defineComponent({
   props: {
     tableData: {
@@ -40,6 +41,7 @@ export default defineComponent({
         prop: "",
       } as defaultSort,
       initialTableData: [] as tableData[],
+      selectedRow: [],
     });
     state.initialTableData = deepCopy(props.tableData);
     const setCurrentRow = (index: number, item: tableData) => {
@@ -62,9 +64,22 @@ export default defineComponent({
       state.soltOrder.order = sortAction[state.soltOrder.order];
       props.tableData.sort(sortRow(prop, state.soltOrder.order));
     };
+    const selectAll = (checked: boolean, value: string) => {
+      if (!checked) {
+        state.selectedRow = [];
+        return;
+      }
+      for (const iterator of state.initialTableData) {
+        state.selectedRow.push(iterator)
+      }
+    };
     const tableData = computed(() => {
       if (!state.soltOrder.order) return state.initialTableData;
       return props.tableData;
+    });
+    const isselectedAll = computed((): boolean => {
+      const tableColumnLength = props.tableData.length;
+      return tableColumnLength === state.selectedRow.length;
     });
     onMounted(() => {
       if (props?.defaultSolt) {
@@ -77,11 +92,21 @@ export default defineComponent({
       sortChange,
       state,
       tableData,
+      selectAll,
+      isselectedAll,
     };
   },
   render() {
-    const { $props, $slots, setCurrentRow, state, sortChange, tableData } =
-      this;
+    const {
+      $props,
+      $slots,
+      setCurrentRow,
+      state,
+      sortChange,
+      tableData,
+      selectAll,
+      isselectedAll,
+    } = this;
     const tableBodyKey = $props.tableColumn.map((item) => {
       return item.prop;
     });
@@ -102,6 +127,15 @@ export default defineComponent({
     return (
       <div class={el["el-table"]}>
         <div class={el["el-header"]}>
+          <div class={[el["el-column"], el["is_selection"]]}>
+            <Xcheckbox
+              v-model={[isselectedAll,"checked"]}
+              indeterminate={!isselectedAll}
+              onHandlerChange={(checked: boolean, value: string) =>
+                selectAll(checked, value)
+              }
+            ></Xcheckbox>
+          </div>
           {$props.tableColumn.map((item) => (
             <div
               class={[
@@ -157,6 +191,9 @@ export default defineComponent({
               ]}
               onClick={() => setCurrentRow(index, item)}
             >
+              <div class={[el["el-row-cell"], el["is_selection"]]}>
+                <Xcheckbox></Xcheckbox>
+              </div>
               {tableBodyKey.map((val) => (
                 <div class={el["el-row-cell"]}>
                   {!tableSlot.includes(val)
