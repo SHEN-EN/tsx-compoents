@@ -41,7 +41,7 @@ export default defineComponent({
         prop: "",
       } as defaultSort,
       initialTableData: [] as tableData[],
-      selectedRow: [],
+      selectedRow: [] as tableData[],
     });
     state.initialTableData = deepCopy(props.tableData);
     const setCurrentRow = (index: number, item: tableData) => {
@@ -70,7 +70,18 @@ export default defineComponent({
         return;
       }
       for (const iterator of state.initialTableData) {
-        state.selectedRow.push(iterator)
+        state.selectedRow.push(iterator);
+      }
+    };
+    const selectCurrentRow = (
+      checked: boolean,
+      value: string,
+      item: tableData,
+      index: number
+    ) => {
+      if (checked) {
+        state.selectedRow.push(item);
+      } else {
       }
     };
     const tableData = computed(() => {
@@ -94,6 +105,7 @@ export default defineComponent({
       tableData,
       selectAll,
       isselectedAll,
+      selectCurrentRow,
     };
   },
   render() {
@@ -106,6 +118,7 @@ export default defineComponent({
       tableData,
       selectAll,
       isselectedAll,
+      selectCurrentRow,
     } = this;
     const tableBodyKey = $props.tableColumn.map((item) => {
       return item.prop;
@@ -129,7 +142,7 @@ export default defineComponent({
         <div class={el["el-header"]}>
           <div class={[el["el-column"], el["is_selection"]]}>
             <Xcheckbox
-              v-model={[isselectedAll,"checked"]}
+              v-model={[state.selectedRow.length, "checked"]}
               indeterminate={!isselectedAll}
               onHandlerChange={(checked: boolean, value: string) =>
                 selectAll(checked, value)
@@ -192,7 +205,14 @@ export default defineComponent({
               onClick={() => setCurrentRow(index, item)}
             >
               <div class={[el["el-row-cell"], el["is_selection"]]}>
-                <Xcheckbox></Xcheckbox>
+                <Xcheckbox
+                  onHandlerChange={(
+                    checked: boolean,
+                    value: string,
+                    item: tableData,
+                    index: number
+                  ) => selectCurrentRow(checked, value, item, index)}
+                ></Xcheckbox>
               </div>
               {tableBodyKey.map((val) => (
                 <div class={el["el-row-cell"]}>
