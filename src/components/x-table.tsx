@@ -42,20 +42,20 @@ export default defineComponent({
       } as defaultSort,
       initialTableData: [] as tableData[],
       selectedRow: [] as tableData[],
-      selectedUid:[],
+      selectedUid: [],
     });
     const setCurrentRow = (index: number, item: tableData) => {
       state.currentRow.row = index === state.currentRow.index ? {} : item;
       state.currentRow.index = index === state.currentRow.index ? -1 : index;
       context.emit("setCurrentRow", state.currentRow);
     };
-    const generateUid = () =>{
-      props.tableData.forEach(item=>{
+    const generateUid = () => {
+      props.tableData.forEach((item) => {
         item.uuid = getUId();
-      })
+      });
       state.initialTableData = deepCopy(props.tableData);
-    }
-    generateUid()
+    };
+    generateUid();
     const sortChange = (prop: string) => {
       //@params 需要排序的对象
       const sortAction = {
@@ -77,7 +77,7 @@ export default defineComponent({
         state.selectedUid = [];
         return;
       }
-      const uuid = []
+      const uuid = [];
       for (const iterator of state.initialTableData) {
         state.selectedUid.push(iterator.uuid);
         state.selectedRow.push(iterator);
@@ -158,7 +158,7 @@ export default defineComponent({
         <div class={el["el-header"]}>
           <div class={[el["el-column"], el["is_selection"]]}>
             <Xcheckbox
-              v-model={[selectionCheckAll, "checked"]}
+              checked={selectionCheckAll}
               indeterminate={!isselectedAll}
               onHandlerChange={(checked: boolean, value: string) =>
                 selectAll(checked, value)

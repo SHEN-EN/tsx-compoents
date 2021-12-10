@@ -27,6 +27,7 @@ export default defineComponent({
     const handlerChange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       state.checked = target.checked;
+      context.emit("update:checked", state.checked);
       context.emit("handlerChange", state.checked, props.value);
     };
     watchEffect(()=>{
