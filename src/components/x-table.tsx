@@ -1,7 +1,7 @@
 import { defineComponent, PropType, reactive, computed, onMounted } from "vue";
 import el from "@/style/x-table.module.scss";
 import { tableColumn, tableData, defaultSort } from "@/type/table";
-import { sortRow, deepCopy } from "@/util";
+import { sortRow, deepCopy, getUId } from "@/util";
 import Xcheckbox from "@/components/x-checkbox";
 export default defineComponent({
   props: {
@@ -42,13 +42,20 @@ export default defineComponent({
       } as defaultSort,
       initialTableData: [] as tableData[],
       selectedRow: [] as tableData[],
+      selectedUid:[],
     });
-    state.initialTableData = deepCopy(props.tableData);
     const setCurrentRow = (index: number, item: tableData) => {
       state.currentRow.row = index === state.currentRow.index ? {} : item;
       state.currentRow.index = index === state.currentRow.index ? -1 : index;
       context.emit("setCurrentRow", state.currentRow);
     };
+    const generateUid = () =>{
+      props.tableData.forEach(item=>{
+        item.uuid = getUId();
+      })
+      state.initialTableData = deepCopy(props.tableData);
+    }
+    generateUid()
     const sortChange = (prop: string) => {
       //@params 需要排序的对象
       const sortAction = {
@@ -67,11 +74,15 @@ export default defineComponent({
     const selectAll = (checked: boolean, value: string) => {
       if (!checked) {
         state.selectedRow = [];
+        state.selectedUid = [];
         return;
       }
+      const uuid = []
       for (const iterator of state.initialTableData) {
+        state.selectedUid.push(iterator.uuid);
         state.selectedRow.push(iterator);
       }
+      context.emit("select-all", { selection: state.selectedRow });
     };
     const selectCurrentRow = (
       checked: boolean,
@@ -81,8 +92,12 @@ export default defineComponent({
     ) => {
       if (checked) {
         state.selectedRow.push(item);
+        state.selectedUid.push(item.uuid);
       } else {
+        state.selectedRow.splice(index, 1);
+        state.selectedUid.splice(index, 1);
       }
+      context.emit("select", { selection: checked ? item : {}, row: index });
     };
     const tableData = computed(() => {
       if (!state.soltOrder.order) return state.initialTableData;
@@ -137,12 +152,13 @@ export default defineComponent({
       .filter((item) => {
         return item;
       });
+    const selectionCheckAll = Boolean(state.selectedRow.length);
     return (
       <div class={el["el-table"]}>
         <div class={el["el-header"]}>
           <div class={[el["el-column"], el["is_selection"]]}>
             <Xcheckbox
-              v-model={[state.selectedRow.length, "checked"]}
+              v-model={[selectionCheckAll, "checked"]}
               indeterminate={!isselectedAll}
               onHandlerChange={(checked: boolean, value: string) =>
                 selectAll(checked, value)
@@ -206,12 +222,10 @@ export default defineComponent({
             >
               <div class={[el["el-row-cell"], el["is_selection"]]}>
                 <Xcheckbox
-                  onHandlerChange={(
-                    checked: boolean,
-                    value: string,
-                    item: tableData,
-                    index: number
-                  ) => selectCurrentRow(checked, value, item, index)}
+                  checked={state.selectedUid.includes(item.uuid)}
+                  onHandlerChange={(checked: boolean, value: string) =>
+                    selectCurrentRow(checked, value, item, index)
+                  }
                 ></Xcheckbox>
               </div>
               {tableBodyKey.map((val) => (

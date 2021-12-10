@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive, onMounted } from "vue";
+import { defineComponent, PropType, reactive, onMounted, watchEffect } from "vue";
 import el from "@/style/x-checkbox.module.scss";
 import { inputEvent } from "@/type/checkbox";
 export default defineComponent({
@@ -29,9 +29,9 @@ export default defineComponent({
       state.checked = target.checked;
       context.emit("handlerChange", state.checked, props.value);
     };
-    onMounted(() => {
-      state.checked = props.checked;
-    });
+    watchEffect(()=>{
+      state.checked = props.checked
+    })
     return {
       handlerChange,
       state,
