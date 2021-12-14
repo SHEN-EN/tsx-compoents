@@ -1,10 +1,10 @@
 import { defineComponent, reactive } from "vue";
-import Xcheckbox from "@/components/x-checkbox";
+import Xbutton from "@/components/x-button";
 
 export default defineComponent({
   setup() {
     const state = reactive({
-      checked: false,
+      checked: true,
     });
     return {
       state,
@@ -12,8 +12,6 @@ export default defineComponent({
   },
   render() {
     const { state } = this;
-    return (
-        <Xcheckbox v-model={[state.checked, "checked"]}>123</Xcheckbox>
-    );
+    return <Xbutton>123</Xbutton>;
   },
 });

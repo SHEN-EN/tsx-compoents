@@ -1,3 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+const getUId = () => {
+    return uuidv4();
+ }   
 const sortRow = (column: string, givenOrder: string) => {
     const orderRegular = {
         'ascending': 1,
@@ -38,4 +42,5 @@ const deepCopy = <T extends Array<T> | unknown>(sourceData: T): T => {
 export {
     sortRow,
     deepCopy,
+    getUId,
 }

@@ -10,6 +10,11 @@ const routes: RouteRecordRaw[] = [
     name: "checkbox",
     component: () => import("@/example/checkbox"),
   },
+  {
+    path: "/button",
+    name: "button",
+    component: () => import("@/example/button"),
+  },
 ];
 
 const router = createRouter({

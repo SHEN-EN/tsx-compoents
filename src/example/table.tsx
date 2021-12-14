@@ -1,12 +1,18 @@
 import { defineComponent, reactive } from 'vue';
 import Xtable from '@/components/x-table';
+import { tableData } from "@/type/table";
+
 export default defineComponent({
   setup() {
     const state = reactive({
       tableData: [
         {
           name:"123",
-          address:'row1'
+          address:'row1',
+          children:[{
+            name:"children",
+            address:'childrenrow1',
+          }]
         },
         {
           name:"1234",
@@ -20,11 +26,10 @@ export default defineComponent({
           name:"1234",
           address:'row2'
         }
-      ],
+      ] as tableData[],
       tableColumn: [
         {
           title: 'Name',
-          scopedSlots: 'name',
           prop:"name",
           sort:true,
         },
@@ -47,13 +52,7 @@ export default defineComponent({
     const { state,setCurrentRow } = this;
     return (
       <div class="render-component">
-        <Xtable onSetCurrentRow={(item:object)=>setCurrentRow(item)} tableData={state.tableData} tableColumn={state.tableColumn} v-slots={{
-          name: (props:any) => {
-            return(
-              <div>{props}</div>
-            )
-          }
-        }}>
+        <Xtable onSetCurrentRow={(item:object)=>setCurrentRow(item)} tableData={state.tableData} tableColumn={state.tableColumn}>
         </Xtable>
       </div>
     )

@@ -1,0 +1,32 @@
+.el-button {
+  line-height: 1;
+  height: 26px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(230, 230, 230);
+  color: rgb(120, 120, 120);
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 0 22px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  &:enabled:hover {
+    color: #409eff;
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
+  }
+}
+.el-disabled{
+    cursor: not-allowed;
+}
+.danger{
+    color: #fff;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+    &:enabled:hover {
+        background: #f78989;
+        border-color: #f78989;
+        color: #fff;
+      }
+}
