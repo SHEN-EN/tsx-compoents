@@ -1,0 +1,43 @@
+.el-input {
+  position: relative;
+  font-size: 14px;
+  display: inline-flex;
+  .el-input-inner {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 30px;
+    line-height: 30px;
+    outline: none;
+    padding: 0 20px;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    width: 100%;
+    &:focus{
+        box-shadow: 0 0 5px #d2e9ff;
+        border-color: #d2e9ff;
+    }
+    &:disabled{
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
+      cursor: not-allowed;
+    }
+  }
+  .el-input-suffixicon{
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    cursor: pointer;
+    i{
+      position: relative;
+      top: 4px;
+    }
+  }
+}

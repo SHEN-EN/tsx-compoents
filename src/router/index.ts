@@ -15,6 +15,11 @@ const routes: RouteRecordRaw[] = [
     name: "button",
     component: () => import("@/example/button"),
   },
+  {
+    path: "/input",
+    name: "input",
+    component: () => import("@/example/input"),
+  },
 ];
 
 const router = createRouter({

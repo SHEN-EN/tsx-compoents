@@ -19,7 +19,7 @@ export default defineComponent({
     },
     height: {
       type: Number as PropType<number>,
-      default: "",
+      default: 0,
     },
     defaultSolt: {
       type: Object as PropType<defaultSort>,
@@ -222,7 +222,6 @@ export default defineComponent({
               ]}
               onClick={() => setCurrentRow(index, item)}
             >
-              {item.children}
               {$props.selection && (
                 <div class={[el["el-row-cell"], el["is_selection"]]}>
                   <Xcheckbox
