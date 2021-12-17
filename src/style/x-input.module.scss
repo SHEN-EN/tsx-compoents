@@ -15,7 +15,7 @@
     height: 30px;
     line-height: 30px;
     outline: none;
-    padding: 0 20px;
+    padding: 0 30px 0 20px;
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     width: 100%;
     &:focus{
@@ -29,15 +29,47 @@
       cursor: not-allowed;
     }
   }
+  .el-input-textarea{
+    display: block;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    color: #606266;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    transition: border-color .2s cubic-bezier(.645,.045,.35);
+    &:focus{
+      outline:none;
+      box-shadow: 0 0 5px #d2e9ff;
+      border-color: #d2e9ff;
+    }
+  }
   .el-input-suffixicon{
     position: absolute;
     height: 100%;
     right: 5px;
     top: 0;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     i{
       position: relative;
-      top: 4px;
+    }
+  }
+  .el-input-limit{
+    @extend .el-input-suffixicon;
+    color: #909399;
+    &-inner{
+      background: #fff;
+      font-size: 12px;
+      line-height: normal;
+      display: inline-block;
+      padding: 0 5px;
     }
   }
 }

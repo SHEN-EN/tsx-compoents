@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "859415",
+      "name": "闭眼",
+      "font_class": "biyan",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "8879756",
+      "name": "eye",
+      "font_class": "eye",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
       "icon_id": "929809",
       "name": "sort-down",
       "font_class": "sortdown",
