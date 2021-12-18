@@ -12,6 +12,6 @@ export default defineComponent({
   },
   render() {
     const { state } = this;
-    return <Xselect disabled={true}></Xselect>;
+    return <Xselect disabled={false}></Xselect>;
   },
 });

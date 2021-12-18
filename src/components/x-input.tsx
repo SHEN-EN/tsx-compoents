@@ -30,7 +30,11 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: false,
     },
-    readonly:{
+    readonly: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+    isSelectCompoents:{
       type: Boolean as PropType<boolean>,
       default: false,
     }
@@ -81,7 +85,7 @@ export default defineComponent({
     };
   },
   render() {
-    const { handlerInput, $props, state, inputType, limitRender,$emit } = this;
+    const { handlerInput, $props, state, inputType, limitRender, $emit } = this;
     return (
       <div class={el["el-input"]}>
         {inputType !== "textarea" ? (
@@ -94,17 +98,20 @@ export default defineComponent({
               disabled={$props.disabled}
               class={el["el-input-inner"]}
               onInput={(e) => handlerInput(e)}
-              onBlur={(e) => $emit('handlerBlur',e)}
-              onFocus={(e) => $emit('handlerFocus',e)}
+              onBlur={(e) => $emit("handlerBlur", e)}
+              onFocus={(e) => $emit("handlerFocus", e)}
             />
             {$props.suffixIcon && (
               <span
                 class={el["el-input-suffixicon"]}
                 onClick={() => {
-                  state.currentIconfont =
-                    state.currentIconfont == "icon-biyan"
-                      ? "icon-eye"
-                      : "icon-biyan";
+                  if ($props.showPassword) {
+                    state.currentIconfont =
+                      state.currentIconfont == "icon-biyan"
+                        ? "icon-eye"
+                        : "icon-biyan";
+                  }
+                  $emit("handlerIcon");
                 }}
               >
                 <i class={["iconfont", state.currentIconfont]}></i>
