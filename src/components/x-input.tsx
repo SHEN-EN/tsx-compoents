@@ -34,7 +34,11 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: false,
     },
-    isSelectCompoents:{
+    reversal:{
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+    selectCompoents:{
       type: Boolean as PropType<boolean>,
       default: false,
     }
@@ -87,7 +91,7 @@ export default defineComponent({
   render() {
     const { handlerInput, $props, state, inputType, limitRender, $emit } = this;
     return (
-      <div class={el["el-input"]}>
+      <div class={[el["el-input"],$props.selectCompoents && el['el-select-tag']]}>
         {inputType !== "textarea" ? (
           <>
             <input
@@ -114,7 +118,7 @@ export default defineComponent({
                   $emit("handlerIcon");
                 }}
               >
-                <i class={["iconfont", state.currentIconfont]}></i>
+                <i class={["iconfont", state.currentIconfont,$props.reversal && el['is-reverse']]}></i>
               </span>
             )}
             {limitRender}

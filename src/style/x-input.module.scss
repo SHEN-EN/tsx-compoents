@@ -1,3 +1,17 @@
+.el-select-tag {
+  .el-input-inner {
+    cursor: pointer;
+  }
+  .el-input-suffixicon {
+    transform: rotate(0deg);
+    i {
+      transition: all 0.3s;
+    }
+    .is-reverse {
+      transform: rotate(-180deg);
+    }
+  }
+}
 .el-input {
   position: relative;
   font-size: 14px;
@@ -18,18 +32,18 @@
     padding: 0 30px 0 20px;
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     width: 100%;
-    &:focus{
-        box-shadow: 0 0 5px #d2e9ff;
-        border-color: #d2e9ff;
+    &:focus {
+      box-shadow: 0 0 5px #d2e9ff;
+      border-color: #d2e9ff;
     }
-    &:disabled{
+    &:disabled {
       background-color: #f5f7fa;
       border-color: #e4e7ed;
       color: #c0c4cc;
       cursor: not-allowed;
     }
   }
-  .el-input-textarea{
+  .el-input-textarea {
     display: block;
     resize: vertical;
     padding: 5px 15px;
@@ -42,14 +56,14 @@
     background-image: none;
     border: 1px solid #dcdfe6;
     border-radius: 4px;
-    transition: border-color .2s cubic-bezier(.645,.045,.35);
-    &:focus{
-      outline:none;
+    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.35);
+    &:focus {
+      outline: none;
       box-shadow: 0 0 5px #d2e9ff;
       border-color: #d2e9ff;
     }
   }
-  .el-input-suffixicon{
+  .el-input-suffixicon {
     position: absolute;
     height: 100%;
     right: 5px;
@@ -57,14 +71,14 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    i{
+    i {
       position: relative;
     }
   }
-  .el-input-limit{
+  .el-input-limit {
     @extend .el-input-suffixicon;
     color: #909399;
-    &-inner{
+    &-inner {
       background: #fff;
       font-size: 12px;
       line-height: normal;

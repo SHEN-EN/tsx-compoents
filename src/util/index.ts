@@ -39,6 +39,7 @@ const deepCopy = <T extends Array<T> | unknown>(sourceData: T): T => {
     }
     return obj
 }
+
 export {
     sortRow,
     deepCopy,
