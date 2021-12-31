@@ -25,6 +25,11 @@ const routes: RouteRecordRaw[] = [
     name: "select",
     component: () => import("@/example/select"),
   },
+  {
+    path: "/tag",
+    name: "tag",
+    component: () => import("@/example/tag"),
+  },
 ];
 
 const router = createRouter({

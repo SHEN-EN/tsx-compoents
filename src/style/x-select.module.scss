@@ -1,6 +1,6 @@
 ul {
     list-style: none;
-    padding: 3px 0;
+    padding:0;
     margin: 0;
     box-sizing: border-box;
     border: 1px solid #e4e7ed;
@@ -19,17 +19,7 @@ ul {
   display: inline-block;
   cursor: pointer;
   position: relative;
-  .popper__arrow{
-    &:after {
-      position: absolute;
-      display: block;
-      width: 0;
-      height: 0;
-      border-color: transparent;
-      border-style: solid;
-    }
-  }
-  .el-select-dropdown {
+  &-dropdown {
     position: relative;
     top: 5px;
     &-item {
@@ -45,5 +35,13 @@ ul {
       box-sizing: border-box;
       cursor: pointer;
     }
+  }
+  .selected{
+    color: #409eff;
+    font-weight: 700;
+  }
+  .is-disabled{
+    color: #c0c4cc;
+    cursor: not-allowed;
   }
 }
