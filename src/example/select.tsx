@@ -18,7 +18,7 @@ export default defineComponent({
                     value: 3,
                 },
             ],
-            value: "13"
+            value: ['13','234']
         });
         watchEffect(() => {
             console.log(state.value)

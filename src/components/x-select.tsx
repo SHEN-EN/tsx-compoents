@@ -10,12 +10,12 @@ export default defineComponent({
             default: [],
         },
         modelValue: {
-            type: String as PropType<string>,
+            type: [String, Array] as PropType<string | string[]>,
             default: ''
         },
         multiple: {
             type: Boolean as PropType<boolean>,
-            default: false
+            default: true
         }
     },
     setup(props, context) {
@@ -29,30 +29,42 @@ export default defineComponent({
             context.emit("visible-change", state.isChange);
         };
         const change = (item: option) => {
-            state.currentItem.push(item);
+            state.currentItem = item;
             context.emit("update:modelValue", item.label);
             context.emit("change", item);
         };
         const handlerOther = () => {
             state.isChange = false;
         };
-        const multipleChange = (item: option) => {
-            state.multipleItem.push(item);
+        const multipleChange = (item: option, index: number) => {
+            state.multipleItem.map(item => item.value).includes(item.value) ? state.multipleItem.splice(index, 1) : state.multipleItem.push(item);
+            const returnLabel = state.multipleItem.map(item => item.label)
+            context.emit("update:modelValue", returnLabel);
+            context.emit("change", returnLabel);
         }
         const renderClass = (item: option) => {
-            !props.multiple ?
-                item.value == state.currentItem.value && el['selected'] : state.multipleItem.map(item => item.value).includes(item.value)
+            if (!props.multiple ?
+                item.value == state.currentItem.value : state.multipleItem.map(item => item.value).includes(item.value)) {
+                return el['selected']
+            }
         }
+        const computedValue = computed(() => {
+            return props.modelValue.constructor == String ? props.modelValue : (props.modelValue as string[]).join(',')
+        })
         onMounted(() => {
+            let currentValue = null
             if (props.modelValue.constructor == String && !props.multiple) {
-                let currentValue = props.options.find(item => {
+                let currentValue = null
+                currentValue = props.options.find(item => {
                     return item.label == props.modelValue
                 })?.value
                 state.currentItem.label = props.modelValue;
                 if (currentValue) state.currentItem.value = currentValue;
-            }
-            if (props.multiple) {
-
+            } else {
+                currentValue = props.options.filter(item => {
+                    return props.modelValue.includes(item.label)
+                })
+                state.multipleItem.push(...currentValue);
             }
         });
         return {
@@ -61,11 +73,11 @@ export default defineComponent({
             multipleChange,
             renderClass,
             state,
+            computedValue,
         };
     },
     render() {
-        const { $attrs, visibleChange, state, $props, change, multipleChange, renderClass } = this;
-        const value = $props.modelValue.constructor == String ? $props.modelValue : $props.modelValue.join(',')
+        const { $attrs, visibleChange, state, $props, change, multipleChange, renderClass, computedValue } = this;
         return (
             <div class={el["el-select"]} onClick={visibleChange}>
                 <Xinput
@@ -74,7 +86,7 @@ export default defineComponent({
                     readonly={true}
                     disabled={$attrs.disabled as boolean}
                     selectCompoents={true}
-                    v-model={$props.modelValue}
+                    v-model={computedValue}
                 ></Xinput>
                 <Xtransition>
                     {$props.options.length && state.isChange && (
@@ -87,7 +99,7 @@ export default defineComponent({
                                             renderClass(item),
                                             item.disabled && el['is-disabled']]}
                                             key={index}
-                                            onClick={() => !$props.multiple ? change(item) : multipleChange(item)}
+                                            onClick={() => !$props.multiple ? change(item) : multipleChange(item, index)}
                                         >
                                             {item.label}
                                         </li>
