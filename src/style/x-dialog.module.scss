@@ -1,0 +1,27 @@
+.el-dialog{
+    position: relative;
+    margin: 0 auto 50px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+    box-sizing: border-box;
+    &-header{
+        padding: 20px 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        &-close{
+            cursor: pointer;
+        }
+    }
+    &-body{
+        padding: 30px 20px;
+        color: #606266;
+        font-size: 14px;
+        word-break: break-all;
+    }
+    &-footer{
+        padding: 10px 20px 20px;
+        text-align: right;
+        box-sizing: border-box;
+    }
+}
